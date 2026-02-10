@@ -9,7 +9,6 @@ import SwiftUI
 
 struct VenueListView: View {
     @ObservedObject var viewModel: VenueListViewModel
-    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             if !viewModel.venues.isEmpty {
@@ -55,9 +54,9 @@ struct VenueListView: View {
 
     private func showErrorView() -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Something went wrong.")
+            Text(DashBoardStrings.somethingWentWrong)
                 .font(.title3)
-            Text("Please try again later.")
+            Text(DashBoardStrings.pleaseTryAgain)
         }
     }
 }

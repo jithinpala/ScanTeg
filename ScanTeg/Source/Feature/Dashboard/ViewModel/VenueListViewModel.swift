@@ -37,7 +37,7 @@ final class VenueListViewModel: ObservableObject {
             venues = [VenueDetailsViewModel(code: code, name: name, address: singleVenue.address)]
         case .paxLocation, .unknown:
             // TODO: pax location doesn't have venue code, so we can't trigger scan ticket with venue code
-            // Need revisit this
+            // Need to revisit this
             venues = []
         }
     }

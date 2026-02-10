@@ -14,25 +14,41 @@ struct DashBoardView: View {
     var body: some View {
         switch viewModel.state {
         case .idle:
-            Text("Idle State")
-                .onAppear {
-                    viewModel.getLocationAuthorization()
-                }
+            VStack {
+                Text(DashBoardStrings.welcomeTitle)
+                    .font(.headline)
+                    .onAppear {
+                        viewModel.getLocationAuthorization()
+                    }
+                Spacer()
+            }
         case .loading:
-            ProgressView()
+            ProgressLoadingView()
         case .locationAuthorized:
-            Text("We got the location")
+            Text(DashBoardStrings.locationAuthorized)
                 .onAppear {
                     Task {
                         await viewModel.getData()
                     }
                 }
         case .locationDenied:
-            Text("Location permission denied. Please enable location services in settings.")
+            locationAccessDeniedView
         case let .venueLoaded(dashboardResponse):
             showVenueList(for: dashboardResponse)
         case .failed:
-            Text("Failed to load data. Please try again.")
+            VStack {
+                Text(DashBoardStrings.somethingWentWrong)
+                    .font(.headline)
+                    .padding(.vertical, 16)
+                Text(DashBoardStrings.pleaseTryAgain)
+                
+                Button(DashBoardStrings.retryButtonTitle) {
+                    Task {
+                        await viewModel.getData()
+                    }
+                }
+                .padding(.top, 16)
+            }
         }
     }
 
@@ -45,9 +61,10 @@ struct DashBoardView: View {
                 })
             VenueListView(viewModel: venueListViewModel)
                 .padding()
-                .navigationTitle("Venue List")
+                .navigationTitle(DashBoardStrings.dashboardTitle)
                 .navigationDestination(for: VenueDetailsViewModel.self) { venue in
-                    TicketScanView(viewModel: venue)
+                    let viewModel = TicketScanViewModel(venueDetails: venue)
+                    TicketScanView(viewModel: viewModel)
                 }
         }
     }
@@ -70,6 +87,36 @@ struct DashBoardView: View {
         }
         .padding(8)
         .frame(maxWidth: .infinity)
+    }
+
+    private var locationAccessDeniedView: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Image(systemName: "location.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 64, height: 64)
+            Text(DashBoardStrings.locationPermissionDenied)
+                .font(.headline)
+                .padding(.top, 16)
+            Text(DashBoardStrings.openSettingForLocationTitle)
+                .padding(.top, 8)
+                .foregroundColor(.secondary)
+            Button(DashBoardStrings.settingButtonTitle) {
+                openAppSettings()
+            }
+            .buttonStyle(.borderedProminent)
+            .padding(.vertical, 16)
+        }
+    }
+
+    private func openAppSettings() {
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+            return
+        }
+        
+        if UIApplication.shared.canOpenURL(settingsUrl) {
+            UIApplication.shared.open(settingsUrl)
+        }
     }
 }
 

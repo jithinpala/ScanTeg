@@ -10,11 +10,6 @@ import CoreLocation
 import Combine
 
 class DashBoardViewModel: ObservableObject {
-    let eventTileTitle = "View events"
-    let scanTileTitle = "Scan Barcode"
-    
-    let manager: DashBoardServiceProtocol
-    
     enum DashboardState {
         case idle
         case loading
@@ -23,11 +18,10 @@ class DashBoardViewModel: ObservableObject {
         case venueLoaded(_ response: DashboardResponse)
         case failed
     }
-        
 
-    @Published var locationManager = LocationManager()
+    let manager: DashBoardServiceProtocol
+    private var locationManager = LocationManager()
     @Published var state: DashboardState = DashboardState.idle
-    
     private var cancellables = Set<AnyCancellable>()
 
     var currentLocation: CLLocationCoordinate2D? {
@@ -49,7 +43,6 @@ class DashBoardViewModel: ObservableObject {
     }
     
     private func setupBinding() {
-        // Observe authorization status changes
         locationManager.$authorizationStatus
             .sink { [weak self] status in
                 self?.updateState(for: status)
@@ -81,12 +74,9 @@ class DashBoardViewModel: ObservableObject {
         do {
             let latitude = currentLocation?.latitude ?? 0.0
             let longitude = currentLocation?.longitude ?? 0.0
-            
             let results = try await manager.fetchDashboardData(latitude: latitude, longitude: longitude)
-            print("Fetched dashboard data: \(results)")
             state = .venueLoaded(results)
         } catch {
-            print("Error fetching dashboard data: \(error)")
             state = .failed
         }
     }

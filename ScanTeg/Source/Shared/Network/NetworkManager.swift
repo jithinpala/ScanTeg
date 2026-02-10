@@ -12,7 +12,7 @@ protocol NetworkManagerProtocol {
         baseURL: String?,
         method: HTTPMethod,
         headers: [String: String]?,
-        body: Data?
+        body: [String: Any]?
     ) async throws -> T
 }
 
@@ -21,7 +21,7 @@ extension NetworkManagerProtocol {
         baseURL: String? = nil,
         method: HTTPMethod = .get,
         headers: [String: String]? = nil,
-        body: Data? = nil
+        body: [String: Any]? = nil
     ) async throws -> T {
         return try await request(baseURL: baseURL, method: method, headers: headers, body: body)
     }
@@ -62,13 +62,17 @@ final class NetworkManager: NetworkManagerProtocol {
     func request<T: Decodable>(baseURL: String?,
                                method: HTTPMethod,
                                headers: [String: String]?,
-                               body: Data?) async throws -> T {
+                               body: [String: Any]?) async throws -> T {
         
+        var bodyData: Data?
+        if let body = body {
+            bodyData = try JSONSerialization.data(withJSONObject: body, options: [])
+        }
         let configuration = RequestConfiguration(
             baseURL: baseURL,
             method: method,
             headers: headers,
-            body: body
+            body: bodyData
         )
 
         let request = try createURLRequest(from: configuration)
