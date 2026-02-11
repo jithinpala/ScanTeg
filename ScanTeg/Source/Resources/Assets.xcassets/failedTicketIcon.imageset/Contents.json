@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "failedTicketIcon.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

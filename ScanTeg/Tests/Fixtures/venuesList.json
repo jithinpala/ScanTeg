@@ -1,0 +1,74 @@
+{
+    "venues": [
+        {
+            "code": "AEC",
+            "name": "Adelaide Entertainment Centre",
+            "address": "Corner Port Road and Adam Street",
+            "city": "Hindmarsh",
+            "state": "SA",
+            "postcode": "5007",
+            "latitude": -34.9098,
+            "longitude": 138.57081,
+            "timezone": "9.50",
+            "pax_locations": [
+                {
+                    "name": "CENTRE",
+                    "gates": [
+                        {
+                            "name": "A"
+                        },
+                        {
+                            "name": "B"
+                        },
+                        {
+                            "name": "C"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "code": "BEC",
+            "name": "Brisbane Entertainment Centre",
+            "address": "Melaleuca Drive",
+            "city": "Boondall",
+            "state": "QLD",
+            "postcode": "4034",
+            "latitude": -27.34438,
+            "longitude": 153.07008,
+            "timezone": "10.00",
+            "pax_locations": [
+                {
+                    "name": "PLAYHOUSE",
+                    "gates": [
+                        {
+                            "name": "1"
+                        },
+                        {
+                            "name": "2"
+                        }
+                    ]
+                },
+                {
+                    "name": "HAMER HALL",
+                    "gates": [
+                        {
+                            "name": "4"
+                        }
+                    ]
+                },
+                {
+                    "name": "FAIRFAX THEATRE",
+                    "gates": [
+                        {
+                            "name": "1"
+                        },
+                        {
+                            "name": "2"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
