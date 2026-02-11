@@ -31,9 +31,9 @@ struct DashboardResponse: Decodable {
     }
     
     init(from decoder: any Decoder) throws {
-        let container = try decoder.container(keyedBy: DynamicCodingKeys.self)
+        let container = try decoder.container(keyedBy: DashboardCodingKeys.self)
         
-        // Check if "venues" key exists - this indicates array response
+        // Check if "venues" key exists - this indicates venue array response
         if container.contains(.venues) {
             let venuesArray = try container.decode([VenueDetails].self, forKey: .venues)
             self.venues = venuesArray
@@ -60,13 +60,13 @@ struct DashboardResponse: Decodable {
             return
         }
         
-        // If none of the above patterns match, initialize with nil values
+        // If none of the above patterns match, initialise all values with nil
         self.venues = nil
         self.singleVenue = nil
         self.paxLocation = nil
     }
     
-    private struct DynamicCodingKeys: CodingKey {
+    private struct DashboardCodingKeys: CodingKey {
         var stringValue: String
         var intValue: Int?
 
@@ -78,10 +78,10 @@ struct DashboardResponse: Decodable {
             return nil
         }
         
-        static let venues = DynamicCodingKeys(stringValue: "venues")!
-        static let code = DynamicCodingKeys(stringValue: "code")!
-        static let name = DynamicCodingKeys(stringValue: "name")!
-        static let gates = DynamicCodingKeys(stringValue: "gates")!
+        static let venues = DashboardCodingKeys(stringValue: "venues")!
+        static let code = DashboardCodingKeys(stringValue: "code")!
+        static let name = DashboardCodingKeys(stringValue: "name")!
+        static let gates = DashboardCodingKeys(stringValue: "gates")!
     }
     
 }

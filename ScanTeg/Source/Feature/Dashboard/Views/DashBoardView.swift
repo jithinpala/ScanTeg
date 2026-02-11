@@ -17,9 +17,6 @@ struct DashBoardView: View {
             VStack {
                 Text(DashBoardStrings.welcomeTitle)
                     .font(.headline)
-                    .onAppear {
-                        viewModel.getLocationAuthorization()
-                    }
                 Spacer()
             }
         case .loading:

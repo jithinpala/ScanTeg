@@ -24,7 +24,7 @@ struct VenueListView: View {
             }
         }
         .onAppear {
-            viewModel.parseResult()
+            viewModel.getVenueList()
         }
     }
 

@@ -20,7 +20,7 @@ final class VenueListViewModel: ObservableObject {
         self.actionHandler = actionHandler
     }
 
-    func parseResult() {
+    func getVenueList() {
         let type = dashboardResponse.responseType
         switch type {
         case let .venues(items):

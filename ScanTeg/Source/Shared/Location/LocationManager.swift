@@ -5,46 +5,50 @@
 //  Created by Jithin Balan on 9/2/2026.
 //
 
-import Foundation
+import Combine
 import CoreLocation
 
-final class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    private(set) var location: CLLocationCoordinate2D?
-    @Published var authorizationStatus: CLAuthorizationStatus = .notDetermined
-    let manager: CLLocationManager
+protocol LocationManagerProtocol {
+    var location:  CLLocationCoordinate2D? { get }
+    var authorizationStatusPublisher: AnyPublisher<CLAuthorizationStatus, Never> { get }
+    var isDeviceLocationServiceEnabled: Bool { get }
+
+    func requestWhenInUseAuthorization()
+}
+
+final class LocationManager: NSObject, LocationManagerProtocol, CLLocationManagerDelegate {
+    var location: CLLocationCoordinate2D?
+    private let manager: CLLocationManager
+    private let authorizationStatusSubject = PassthroughSubject<CLAuthorizationStatus, Never>()
+
+    var authorizationStatusPublisher: AnyPublisher<CLAuthorizationStatus, Never> {
+        authorizationStatusSubject.eraseToAnyPublisher()
+    }
+
+    var isDeviceLocationServiceEnabled: Bool {
+        let status = manager.authorizationStatus
+        return status != .notDetermined &&
+        status != .denied &&
+        status != .restricted
+    }
 
     override init() {
         manager = CLLocationManager()
         super.init()
         manager.delegate = self
-        authorizationStatus = manager.authorizationStatus
     }
-    
-    func checkLocationAuthorization() {
-        authorizationStatus = manager.authorizationStatus
-        
-        switch authorizationStatus {
-        case .notDetermined:
-            manager.requestWhenInUseAuthorization()
-        case .restricted, .denied:
-            print("Location restricted")
-        case .authorizedAlways:
-            manager.startUpdatingLocation()
-        case .authorizedWhenInUse:
-            manager.startUpdatingLocation()
-            location = manager.location?.coordinate
-        @unknown default:
-            print("Location service disabled")
-            
-        }
+
+    func requestWhenInUseAuthorization() {
+        manager.requestWhenInUseAuthorization()
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        location = locations.first?.coordinate
     }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        authorizationStatus = manager.authorizationStatus
-        checkLocationAuthorization()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        location = locations.first?.coordinate
+        authorizationStatusSubject.send(manager.authorizationStatus)
+        guard !isDeviceLocationServiceEnabled else { return }
+        requestWhenInUseAuthorization()
     }
 }

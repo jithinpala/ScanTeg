@@ -5,9 +5,9 @@
 //  Created by Jithin Balan on 9/2/2026.
 //
 
+import Combine
 import Foundation
 import CoreLocation
-import Combine
 
 class DashBoardViewModel: ObservableObject {
     enum DashboardState {
@@ -20,30 +20,27 @@ class DashBoardViewModel: ObservableObject {
     }
 
     let manager: DashBoardServiceProtocol
-    private var locationManager = LocationManager()
-    @Published var state: DashboardState = DashboardState.idle
+    private let locationManager: any LocationManagerProtocol
     private var cancellables = Set<AnyCancellable>()
+    @Published var state: DashboardState = DashboardState.idle
 
     var currentLocation: CLLocationCoordinate2D? {
         locationManager.location
     }
     
-    var isLocationPermissionGranted: Bool {
-        let status = locationManager.authorizationStatus
-        switch status {
-        case .authorizedAlways, .authorizedWhenInUse:
-            return true
-        default: return false
-        }
-    }
-    
-    init(manager: DashBoardServiceProtocol = DashBoardService()) {
+    init(
+        manager: DashBoardServiceProtocol = DashBoardService(),
+        locationManager: any LocationManagerProtocol = LocationManager()
+    ) {
         self.manager = manager
+        self.locationManager = locationManager
         setupBinding()
     }
     
     private func setupBinding() {
-        locationManager.$authorizationStatus
+        // Subscribe to authorization status changes
+        locationManager.authorizationStatusPublisher
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] status in
                 self?.updateState(for: status)
             }
@@ -61,11 +58,6 @@ class DashBoardViewModel: ObservableObject {
         @unknown default:
             state = .locationDenied
         }
-    }
-
-    func getLocationAuthorization() {
-        guard !isLocationPermissionGranted else { return }
-        locationManager.checkLocationAuthorization()
     }
 
     @MainActor

@@ -26,14 +26,37 @@
 		22B83D422F39E44B0006CD89 /* Exceptions for "Tests" folder in "ScanTeg" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				ScanTegTests.swift,
+				"Feature/Dashboard/DashboardResponse+Extension.swift",
+				Feature/Dashboard/DashBoardViewModelTests.swift,
+				Feature/Dashboard/TicketScanViewModelTests.swift,
+				Feature/Dashboard/VenueListViewModelTests.swift,
+				Fixtures/ticketScanResult.json,
+				Fixtures/venuesList.json,
+				Network/MockNetworkManager.swift,
+				Network/MockNetworkManagerProtocol.swift,
+				Shared/CameraPermissionManagerTests.swift,
+				Shared/MockDashBoardService.swift,
+				Shared/MockLocationManager.swift,
+				Shared/MockSystemCameraPermissionManager.swift,
 			);
 			target = 22B83D0C2F39E2F00006CD89 /* ScanTeg */;
 		};
 		22B83D432F39E44B0006CD89 /* Exceptions for "Tests" folder in "ScanTegTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				ScanTegTests.swift,
+				"Feature/Dashboard/DashboardResponse+Extension.swift",
+				Feature/Dashboard/DashBoardViewModelTests.swift,
+				Feature/Dashboard/TicketScanViewModelTests.swift,
+				Feature/Dashboard/VenueListViewModelTests.swift,
+				Fixtures/singleVenue.json,
+				Fixtures/ticketScanResult.json,
+				Fixtures/venuesList.json,
+				Network/MockNetworkManager.swift,
+				Network/MockNetworkManagerProtocol.swift,
+				Shared/CameraPermissionManagerTests.swift,
+				Shared/MockDashBoardService.swift,
+				Shared/MockLocationManager.swift,
+				Shared/MockSystemCameraPermissionManager.swift,
 			);
 			target = 22B83D1C2F39E2F10006CD89 /* ScanTegTests */;
 		};

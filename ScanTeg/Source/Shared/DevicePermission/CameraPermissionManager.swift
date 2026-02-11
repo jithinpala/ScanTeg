@@ -8,6 +8,21 @@
 import Foundation
 import AVFoundation
 
+protocol CameraPermissionManagerProtocol {
+    func authorizationStatus(for mediaType: AVMediaType) -> AVAuthorizationStatus
+    func requestAccess(for mediaType: AVMediaType) async -> Bool
+}
+
+struct SystemCameraPermissionManager: CameraPermissionManagerProtocol {
+    func authorizationStatus(for mediaType: AVMediaType) -> AVAuthorizationStatus {
+        AVCaptureDevice.authorizationStatus(for: mediaType)
+    }
+    
+    func requestAccess(for mediaType: AVMediaType) async -> Bool {
+        await AVCaptureDevice.requestAccess(for: mediaType)
+    }
+}
+
 final class CameraPermissionManager: ObservableObject {
     enum AuthorizationStatus {
         case authorized
@@ -15,10 +30,16 @@ final class CameraPermissionManager: ObservableObject {
         case notDetermined
     }
     @Published var permissionStatus: AuthorizationStatus = .notDetermined
+    
+    private let authorizationProvider: CameraPermissionManagerProtocol
+    
+    init(authorizationProvider: CameraPermissionManagerProtocol = SystemCameraPermissionManager()) {
+        self.authorizationProvider = authorizationProvider
+    }
 
     func requestCameraPermission() {
-        let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
-        switch cameraAuthorizationStatus {
+        let status = authorizationProvider.authorizationStatus(for: .video)
+        switch status {
         case .authorized:
             permissionStatus = .authorized
         case .notDetermined:

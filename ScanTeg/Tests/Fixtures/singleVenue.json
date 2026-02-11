@@ -1,0 +1,27 @@
+{
+    "code": "AEC",
+    "name": "Adelaide Entertainment Centre",
+    "address": "Corner Port Road and Adam Street",
+    "city": "Hindmarsh",
+    "state": "SA",
+    "postcode": "5007",
+    "latitude": -34.9098,
+    "longitude": 138.57081,
+    "timezone": "9.50",
+    "pax_locations": [
+        {
+            "name": "CENTRE",
+            "gates": [
+                {
+                    "name": "A"
+                },
+                {
+                    "name": "B"
+                },
+                {
+                    "name": "C"
+                }
+            ]
+        }
+    ]
+}
