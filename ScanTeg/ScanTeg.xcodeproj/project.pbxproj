@@ -19,7 +19,6 @@
 /* Begin PBXFileReference section */
 		22B83D0D2F39E2F00006CD89 /* ScanTeg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScanTeg.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22B83D1D2F39E2F10006CD89 /* ScanTegTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScanTegTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		22B83D542F39ED180006CD89 /* ScanTeg-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ScanTeg-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -35,6 +34,7 @@
 				Network/MockNetworkManager.swift,
 				Network/MockNetworkManagerProtocol.swift,
 				Shared/CameraPermissionManagerTests.swift,
+				Shared/MockBarcodeScannerManager.swift,
 				Shared/MockDashBoardService.swift,
 				Shared/MockLocationManager.swift,
 				Shared/MockSystemCameraPermissionManager.swift,
@@ -54,6 +54,7 @@
 				Network/MockNetworkManager.swift,
 				Network/MockNetworkManagerProtocol.swift,
 				Shared/CameraPermissionManagerTests.swift,
+				Shared/MockBarcodeScannerManager.swift,
 				Shared/MockDashBoardService.swift,
 				Shared/MockLocationManager.swift,
 				Shared/MockSystemCameraPermissionManager.swift,
@@ -100,7 +101,6 @@
 		22B83D042F39E2F00006CD89 = {
 			isa = PBXGroup;
 			children = (
-				22B83D542F39ED180006CD89 /* ScanTeg-Info.plist */,
 				22B83D412F39E4410006CD89 /* Tests */,
 				22B83D3A2F39E3510006CD89 /* Source */,
 				22B83D0E2F39E2F00006CD89 /* Products */,

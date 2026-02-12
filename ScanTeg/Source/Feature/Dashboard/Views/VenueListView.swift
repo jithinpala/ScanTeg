@@ -10,10 +10,10 @@ import SwiftUI
 struct VenueListView: View {
     @ObservedObject var viewModel: VenueListViewModel
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: DesignSystem.Spacing.zero) {
             if !viewModel.venues.isEmpty {
                 ScrollView {
-                    LazyVStack(spacing: 0) {
+                    LazyVStack(spacing: DesignSystem.Spacing.zero) {
                         ForEach(viewModel.venues) { venue in
                             makeVenueRow(venue)
                         }
@@ -32,28 +32,28 @@ struct VenueListView: View {
         Button {
             viewModel.venueTapAction(for: venue)
         } label: {
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: DesignSystem.Spacing.small) {
                 Text(venue.name)
                     .font(.headline)
                     .foregroundColor(.black)
                 if let address = venue.address {
                     Text(address)
                         .foregroundColor(.black)
-                        .padding(.leading, 4)
+                        .padding(.leading, DesignSystem.Spacing.extraSmall)
                 }
             }
-            .padding(8)
+            .padding(DesignSystem.Spacing.small)
             .frame(maxWidth: .infinity, alignment: .leading)
             .overlay{
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.gray, lineWidth: 2)
+                RoundedRectangle(cornerRadius: DesignSystem.Spacing.small)
+                    .stroke(Color.gray, lineWidth: DesignSystem.LineWidth.medium)
             }
         }
 
     }
 
     private func showErrorView() -> some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: DesignSystem.Spacing.small) {
             Text(DashBoardStrings.somethingWentWrong)
                 .font(.title3)
             Text(DashBoardStrings.pleaseTryAgain)

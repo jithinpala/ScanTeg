@@ -36,7 +36,7 @@ struct DashBoardView: View {
             VStack {
                 Text(DashBoardStrings.somethingWentWrong)
                     .font(.headline)
-                    .padding(.vertical, 16)
+                    .padding(.vertical, DesignSystem.Spacing.medium)
                 Text(DashBoardStrings.pleaseTryAgain)
                 
                 Button(DashBoardStrings.retryButtonTitle) {
@@ -44,7 +44,7 @@ struct DashBoardView: View {
                         await viewModel.getData()
                     }
                 }
-                .padding(.top, 16)
+                .padding(.top, DesignSystem.Spacing.medium)
             }
         }
     }
@@ -71,38 +71,38 @@ struct DashBoardView: View {
             Image("mobile_scan_icon")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 50, height: 50)
+                .frame(width: DesignSystem.IconSize.medium, height: DesignSystem.IconSize.medium)
                 .foregroundColor(.blue)
             Text(title)
                 .font(.headline)
                 .foregroundColor(.primary)
         }
-        .padding(18)
+        .padding(DesignSystem.Spacing.medium)
         .overlay {
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.gray, lineWidth: 1)
+            RoundedRectangle(cornerRadius: DesignSystem.Spacing.small)
+                .stroke(Color.gray, lineWidth: DesignSystem.LineWidth.small)
         }
-        .padding(8)
+        .padding(DesignSystem.Spacing.small)
         .frame(maxWidth: .infinity)
     }
 
     private var locationAccessDeniedView: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: DesignSystem.Spacing.zero) {
             Image(systemName: "location.fill")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 64, height: 64)
+                .frame(width: DesignSystem.Spacing.xxxLarge, height: DesignSystem.Spacing.xxxLarge)
             Text(DashBoardStrings.locationPermissionDenied)
                 .font(.headline)
-                .padding(.top, 16)
+                .padding(.top, DesignSystem.Spacing.medium)
             Text(DashBoardStrings.openSettingForLocationTitle)
-                .padding(.top, 8)
+                .padding(.top, DesignSystem.Spacing.small)
                 .foregroundColor(.secondary)
             Button(DashBoardStrings.settingButtonTitle) {
                 openAppSettings()
             }
             .buttonStyle(.borderedProminent)
-            .padding(.vertical, 16)
+            .padding(.vertical, DesignSystem.Spacing.medium)
         }
     }
 

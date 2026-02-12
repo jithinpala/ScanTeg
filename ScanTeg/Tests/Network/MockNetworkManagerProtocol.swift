@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 @testable import ScanTeg
 
 protocol MockNetworkManagerProtocol: AnyObject, NetworkManagerProtocol {

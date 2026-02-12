@@ -8,7 +8,6 @@
 import Combine
 import CoreLocation
 import Foundation
-
 @testable import ScanTeg
 
 final class MockLocationManager: NSObject, LocationManagerProtocol {
@@ -32,7 +31,6 @@ final class MockLocationManager: NSObject, LocationManagerProtocol {
 
     // Helper method for tests to simulate status changes
     func simulateAuthorizationStatusChange(_ status: CLAuthorizationStatus) {
-        //authorizationStatus = status
         authorizationStatusSubject.send(status)
     }
     
