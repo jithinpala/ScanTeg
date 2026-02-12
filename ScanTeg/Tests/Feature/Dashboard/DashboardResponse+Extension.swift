@@ -10,7 +10,7 @@ import Foundation
 @testable import ScanTeg
 
 extension DashboardResponse {
-    static func dashboardResponseForSingleVenue() -> DashboardResponse {
+    static func dashboardResponseForSingleVenue() throws -> DashboardResponse {
         let sampleData = """
         {
             "code": "AEC",
@@ -42,12 +42,12 @@ extension DashboardResponse {
         """
         let decoder = JSONDecoder()
         guard let data = sampleData.data(using: .utf8) else {
-            fatalError("Couldn't convert sample string to data")
+            throw NetworkError(errorCode: "ERROR-0", message: "Not a valid data")
         }
-        return try! decoder.decode(DashboardResponse.self, from: data)
+        return try decoder.decode(DashboardResponse.self, from: data)
     }
 
-    static func dashboardResponseForVenue() -> DashboardResponse {
+    static func dashboardResponseForVenue() throws -> DashboardResponse {
         let sampleData = """
         {
             "venues": [
@@ -110,8 +110,8 @@ extension DashboardResponse {
         """
         let decoder = JSONDecoder()
         guard let data = sampleData.data(using: .utf8) else {
-            fatalError("Couldn't convert sample string to data")
+            throw NetworkError(errorCode: "ERROR-0", message: "Not a valid data")
         }
-        return try! decoder.decode(DashboardResponse.self, from: data)
+        return try decoder.decode(DashboardResponse.self, from: data)
     }
 }
