@@ -11,7 +11,7 @@ import Testing
 struct VenueListViewModelTests {
     @Test
     func getVenueListForSingleVenue() async throws {
-        let dashboardResponse = DashboardResponse.dashboardResponseForSingleVenue()
+        let dashboardResponse = try DashboardResponse.dashboardResponseForSingleVenue()
         let viewModel = makeVenueListViewModel(dashboardResponse: dashboardResponse) { _ in }
         viewModel.getVenueList()
         
@@ -20,7 +20,7 @@ struct VenueListViewModelTests {
 
     @Test
     func getVenueList() async throws {
-        let dashboardResponse = DashboardResponse.dashboardResponseForVenue()
+        let dashboardResponse = try DashboardResponse.dashboardResponseForVenue()
         let viewModel = makeVenueListViewModel(dashboardResponse: dashboardResponse) { _ in }
         viewModel.getVenueList()
         
@@ -29,8 +29,8 @@ struct VenueListViewModelTests {
 
     @Test
     func getVenueListActionHandler() async throws {
-        await confirmation(expectedCount: 1) { confirm in
-            let dashboardResponse = DashboardResponse.dashboardResponseForSingleVenue()
+        try await confirmation(expectedCount: 1) { confirm in
+            let dashboardResponse = try DashboardResponse.dashboardResponseForSingleVenue()
             let viewModel = makeVenueListViewModel(dashboardResponse: dashboardResponse) { venueDetails in
                 #expect(venueDetails.code == "AEC")
                 #expect(venueDetails.name == "Adelaide Entertainment Centre")

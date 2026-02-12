@@ -17,7 +17,7 @@ final class MockDashBoardService: DashBoardServiceProtocol {
             if let response = mockResponse {
                 return response
             }
-            return DashboardResponse.dashboardResponseForSingleVenue()
+            return try DashboardResponse.dashboardResponseForSingleVenue()
         } else {
             throw NetworkError(errorCode: "TEST_ERROR", message: "Test error")
         }
