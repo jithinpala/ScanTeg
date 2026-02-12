@@ -14,8 +14,8 @@
             filePath = "Tests/Network/MockNetworkManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
             landmarkName = "request(baseURL:method:headers:body:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,13 +30,13 @@
             filePath = "Tests/Network/MockNetworkManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
             landmarkName = "request(baseURL:method:headers:body:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "254F9AC5-3656-46B1-9298-891C44ACB9F6 - 4495a2201dcecd0e"
+                  uuid = "254F9AC5-3656-46B1-9298-891C44ACB9F6 - 4495a2201dcecd2d"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -46,11 +46,11 @@
                   urlString = "file:///Users/jithinbalan/Documents/CodeTest/ScanTeg/ScanTeg/Tests/Network/MockNetworkManager.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "32"
-                  endingLineNumber = "32">
+                  startingLineNumber = "31"
+                  endingLineNumber = "31">
                </Location>
                <Location
-                  uuid = "254F9AC5-3656-46B1-9298-891C44ACB9F6 - 4495a2201dcecd0e"
+                  uuid = "254F9AC5-3656-46B1-9298-891C44ACB9F6 - 4495a2201dcecd2d"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -60,8 +60,8 @@
                   urlString = "file:///Users/jithinbalan/Documents/CodeTest/ScanTeg/ScanTeg/Tests/Network/MockNetworkManager.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "32"
-                  endingLineNumber = "32">
+                  startingLineNumber = "31"
+                  endingLineNumber = "31">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -76,8 +76,8 @@
             filePath = "Tests/Network/MockNetworkManagerProtocol.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
             landmarkName = "loadJSON()"
             landmarkType = "7">
          </BreakpointContent>
@@ -85,24 +85,8 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "FCAA7DBB-1103-4B95-8237-7E4ECEA216BF"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Source/Feature/Dashboard/Views/TicketScanView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "3D1F74EC-5CA3-4A4D-BD39-AEA58226EDCE"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Feature/Dashboard/ViewModel/DashBoardViewModel.swift"
@@ -111,6 +95,38 @@
             startingLineNumber = "70"
             endingLineNumber = "70"
             landmarkName = "getData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A44FFD96-EFF2-4A64-B682-8E072D063CFD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/Feature/Dashboard/ViewModel/BarcodeScannerViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "setRectOfInterest(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B92F0BEE-CB93-4A5C-94E8-B2617786E1D1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/Shared/BarcodeScanner/BarcodeScannerManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "metadataOutput(_:didOutput:from:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

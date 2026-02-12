@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 @testable import ScanTeg
 
 extension DashboardResponse {

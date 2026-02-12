@@ -11,14 +11,7 @@ import AVFoundation
 
 @MainActor
 final class TicketScanViewModel: ObservableObject {
-    let venueDetails: VenueDetailsViewModel
-    let manager: DashBoardServiceProtocol
-    private var cancellables = Set<AnyCancellable>()
-    private var scannedBarcode: String?
-    @Published var scannerViewModel = BarcodeScannerViewModel()
-    @Published var state: ViewState = .requestAccess
-    let cameraManager = CameraPermissionManager()
-        
+
     enum ViewState {
         case scanning
         case loading
@@ -27,22 +20,32 @@ final class TicketScanViewModel: ObservableObject {
         case cameAccessDenied
         case requestAccess
     }
-    
+
+    let venueDetails: VenueDetailsViewModel
+    let manager: DashBoardServiceProtocol
+    let cameraManager = CameraPermissionManager()
+    private var cancellables = Set<AnyCancellable>()
+    private var scannedBarcode: String?
+    private var scannerManager: BarcodeScannerManagerProtocol
+    @Published var state: ViewState = .requestAccess
+
     init(
         venueDetails: VenueDetailsViewModel,
-        manager: DashBoardServiceProtocol = DashBoardService()
+        manager: DashBoardServiceProtocol = DashBoardService(),
+        scannerManager: BarcodeScannerManagerProtocol = BarcodeScannerManager()
     ) {
         self.venueDetails = venueDetails
         self.manager = manager
+        self.scannerManager = scannerManager
         setupBinding()
     }
     
     private func setupBinding() {
-        scannerViewModel.$scannedCode
+        scannerManager.scannedCode
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] barcode in
-                guard let code = barcode else { return }
-                self?.scannedBarcode = code
-                self?.scanTicket(for: code)
+                self?.scannedBarcode = barcode
+                self?.scanTicket(for: barcode)
             }
             .store(in: &cancellables)
 
@@ -81,15 +84,15 @@ final class TicketScanViewModel: ObservableObject {
     }
     
     func getSession() -> AVCaptureSession {
-        scannerViewModel.getSession()
+        scannerManager.getSession()
     }
 
     func startScanning() {
-        scannerViewModel.startScanning()
+        scannerManager.startScanning()
     }
 
     func stopScanning() {
-        scannerViewModel.stopScanning()
+        scannerManager.stopScanning()
     }
 
     func tryAgain() {

@@ -47,11 +47,34 @@ struct TicketScanViewModelTests {
         #expect(result == "SUCCESS")
     }
 
+    @Test
+    func startBarcodeReader() async throws {
+        let venueDetailsViewModel = VenueDetailsViewModel(code: "ABC", name: "Sydney", address: "Sydney NSW")
+        let mockScannerManager = MockBarcodeScannerManager()
+        let viewModel = await makeViewModel(venueDetails: venueDetailsViewModel, scannerManager: mockScannerManager)
+        await viewModel.startScanning()
+        #expect(mockScannerManager.didStartScanning)
+    }
+
+    @Test
+    func stopBarcodeReader() async throws {
+        let venueDetailsViewModel = VenueDetailsViewModel(code: "ABC", name: "Sydney", address: "Sydney NSW")
+        let mockScannerManager = MockBarcodeScannerManager()
+        let viewModel = await makeViewModel(venueDetails: venueDetailsViewModel, scannerManager: mockScannerManager)
+        await viewModel.stopScanning()
+        #expect(mockScannerManager.didStopScanning)
+    }
+
     @MainActor
     private func makeViewModel(
         venueDetails: VenueDetailsViewModel,
-        manager: DashBoardServiceProtocol = MockDashBoardService()
+        manager: DashBoardServiceProtocol = MockDashBoardService(),
+        scannerManager: BarcodeScannerManagerProtocol = MockBarcodeScannerManager()
     ) -> TicketScanViewModel {
-        TicketScanViewModel(venueDetails: venueDetails, manager: manager)
+        TicketScanViewModel(
+            venueDetails: venueDetails,
+            manager: manager,
+            scannerManager: scannerManager
+        )
     }
 }
